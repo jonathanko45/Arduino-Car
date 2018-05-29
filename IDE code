@@ -1,6 +1,20 @@
 //int the name of the sensors to the pin numbers that they are
 // eg. int touch1 = 2;
 
+int leftMotor1 = 4;
+int leftMotor2 = 5;
+int rightMotor1 = 6; 
+int rightMotor2 = 7;
+int touch1 = 2;
+int touch2 = 
+int touch3 =
+int touch4 =
+int blueToothRXD = 1;
+int blueToothTXD = 0;
+int light = A0;
+int ultrasonic1 = 11;
+int ultrasonic2 = 12;
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
