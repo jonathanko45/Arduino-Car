@@ -11,13 +11,9 @@ void loop() {
   // put your main code here, to run repeatedly:
   //check whether arduino is reciving signal or not 
   while(Serial.available() == 0){
-   // read the incoming byte:
-                incomingByte = Serial.read();
-
-                // say what you got:
-                Serial.print("I received: ");
-                Serial.println(incomingByte, DEC);
-   }
+  
+    char val = Serial.read() ; //reads the signal
+    Serial.print(val);
   
   
 }
