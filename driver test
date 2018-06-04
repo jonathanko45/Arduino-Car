@@ -1,0 +1,21 @@
+
+int c = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(2,INPUT);
+}
+
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  while(c < 5){
+    digitalWrite(4, HIGH);
+    digitalWrite(7, HIGH);
+    delay(1000);
+    c++;
+  }
+  digitalWrite(4, LOW);
+  digitalWrite(7, LOW);
+}
