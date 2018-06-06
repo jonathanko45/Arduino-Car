@@ -1,10 +1,10 @@
-//int the name of the sensors to the pin numbers that they are
-// eg. int touch1 = 2;
-
-int leftMotor1 = 4;
-int leftMotor2 = 5;
-int rightMotor1 = 6; 
-int rightMotor2 = 7;
+/*
+HIGH = backwards
+LOW = forwards
+*/
+/*
+int leftMotor1 = 4; HIGH / LOW (left)
+int rightMotor2 = 7; HIGH / LOW (right)
 int touch1 = 2;
 int touch2 = 
 int touch3 =
@@ -14,20 +14,54 @@ int blueToothTXD = 0;
 int light = A0;
 int ultrasonic1 = 11;
 int ultrasonic2 = 12;
+*/
+
+char command;<br>String string;
 
 void setup() {
-  // put your setup code here, to run once:
-  //Serial.begin(9600);
-  pinMode(2,INPUT);
+  pinMode(7, OUTPUT);//MOTOR2
+  pinMode(4, OUTPUT);//MOTOR1
+  Serial.begin(9600);
+  
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  //check whether arduino is reciving signal or not 
-  while(Serial.available() == 0){
+  if (Serial.available() > 0)
+    string = "";
   
-    char val = Serial.read() ; //reads the signal
-    Serial.print(val);
+  while(Serial.available() > 0){
+    command = ((byte)Serial.read());
+    
+    if(command == ':'){
+      break;
+    } 
+    else {
+      string += command;
+    } 
+    delay(1);
+  }
   
+  if(string == "F"){//Forward
+    digitalWrite(4, LOW); 
+    digitalWrite(7, LOW);
+    Serial.println(string);
+  }
   
+  if(string =="B"){//Back
+    digitalWrite(4, HIGH);
+    digitalWrite(7, HIGH);
+    Serial.println(string);
+  }
+  
+  if(string =="R"){//Turn Right
+    digitalWrite(4, LOW);
+    digitalWrite(7, HIGH);
+    Serial.println(string);
+  }
+  
+  if(string =="L"){//Turn Left
+    digitalWrite(4, HIGH);
+    digitalWrite(7, LOW);
+    Serial.println(string);
+  }
 }
