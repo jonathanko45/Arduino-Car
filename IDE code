@@ -1,67 +1,59 @@
-/*
-HIGH = backwards
-LOW = forwards
-*/
-/*
-int leftMotor1 = 4; HIGH / LOW (left)
-int rightMotor2 = 7; HIGH / LOW (right)
-int touch1 = 2;
-int touch2 = 
-int touch3 =
-int touch4 =
-int blueToothRXD = 1;
-int blueToothTXD = 0;
-int light = A0;
-int ultrasonic1 = 11;
-int ultrasonic2 = 12;
-*/
+#include <SoftwareSerial.h>
+SoftwareSerial mySerial(8, 12); // RX, TX
 
-char command;<br>String string;
+int a;
 
 void setup() {
-  pinMode(7, OUTPUT);//MOTOR2
-  pinMode(4, OUTPUT);//MOTOR1
+  pinMode(8, INPUT);
+  pinMode(12, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(7, OUTPUT);
   Serial.begin(9600);
-  
+  mySerial.begin(9600);
 }
 
-void loop() {
-  if (Serial.available() > 0)
-    string = "";
-  
-  while(Serial.available() > 0){
-    command = ((byte)Serial.read());
     
-    if(command == ':'){
-      break;
-    } 
-    else {
-      string += command;
-    } 
-    delay(1);
-  }
+void loop() {
   
-  if(string == "F"){//Forward
-    digitalWrite(4, LOW); 
-    digitalWrite(7, LOW);
-    Serial.println(string);
-  }
-  
-  if(string =="B"){//Back
-    digitalWrite(4, HIGH);
-    digitalWrite(7, HIGH);
-    Serial.println(string);
-  }
-  
-  if(string =="R"){//Turn Right
-    digitalWrite(4, LOW);
-    digitalWrite(7, HIGH);
-    Serial.println(string);
-  }
-  
-  if(string =="L"){//Turn Left
-    digitalWrite(4, HIGH);
-    digitalWrite(7, LOW);
-    Serial.println(string);
+while (mySerial.available()){
+  // if text arrived in from BT serial...
+
+    a=mySerial.read();
+    if (a=='0'){
+      analogWrite(5, 0);
+      analogWrite(6, 0);
+    }else{
+      if (a=='1')
+      {
+        
+        digitalWrite(4, LOW);
+        digitalWrite(7, LOW);
+        analogWrite(5, 255);
+        analogWrite(6, 255);
+      }
+      if (a=='2')
+      {
+        digitalWrite(4, LOW);
+        digitalWrite(7, HIGH);
+        analogWrite(5, 255);
+        analogWrite(6, 255);
+      }
+      if (a=='3')
+      {
+        digitalWrite(4, HIGH);
+        digitalWrite(7, LOW);
+        analogWrite(5, 255);
+        analogWrite(6, 255);
+      }   
+      if (a=='4')
+      {
+        digitalWrite(4, HIGH);
+        digitalWrite(7, HIGH);
+        analogWrite(5, 255);
+        analogWrite(6, 255);
+      }
+    }
   }
 }
+
+ 
