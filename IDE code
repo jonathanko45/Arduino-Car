@@ -1,6 +1,8 @@
 #include <SoftwareSerial.h>
 SoftwareSerial mySerial(8, 12); // RX, TX
 
+// do else if instead of if
+
 int a;
 
 void setup() {
@@ -52,6 +54,7 @@ while (mySerial.available()){
         analogWrite(5, 255);
         analogWrite(6, 255);
       }
+      //mySerial.available() = 0;
     }
   }
 }
