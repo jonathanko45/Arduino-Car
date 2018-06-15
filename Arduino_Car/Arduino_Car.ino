@@ -6,6 +6,7 @@ int mode = 0;
 long duration, distance;
 
 void setup() {
+  // initalizing the pin locations and input/output
   pinMode(8, INPUT);
   pinMode(2, OUTPUT);
   pinMode(4, OUTPUT);
@@ -13,12 +14,15 @@ void setup() {
   pinMode(12, INPUT);
   pinMode(13, OUTPUT);
   pinMode(A0, INPUT);
+  // initalizing the bitrate per second between the arduino and bluetooth
   Serial.begin(9600);
   mySerial.begin(9600);
 }
 
 void loop() {
+  // when the bluetooth sensor detects input form the moblie device
   while (mySerial.available()){
+    // reads the input and puts it into a variable
     a = mySerial.read();
     if (a == 'J')
     {
